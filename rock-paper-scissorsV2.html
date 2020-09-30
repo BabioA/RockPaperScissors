@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <script>
+
+			function computerPlay() {
+				let index = Math.floor(Math.random() * 3);
+				return options[index];
+			}
+			options = ["rock", "paper", "scissors"]
+
+            let playerScore = 0,
+                computerScore = 0;
+
+			function round(playerselection, computerselection) {
+				if ((playerselection === "rock" && computerselection === "scissors") || (playerselection === "paper" && computerselection === "rock") || 
+					(playerselection === "scissors" && computerselection === "paper")) {
+                    playerScore = playerScore + 1;
+					console.log(message("Won",playerselection,computerselection));
+				} else if (playerselection === computerselection){ 
+					console.log(message("Tied",computerselection + " doesn't",playerselection));
+				} else {
+                    computerScore = computerScore + 1;
+					console.log(message("lost",computerselection,playerselection));
+				}
+			} 
+			function message(result, winningvalue, losingvalue) {
+				return "You " + result + "! " + winningvalue + " beat " + losingvalue;
+			}
+            function game(){ 
+                let playerselection,
+                    computerselection;
+                playerselection = window.prompt('Input to play rock, paper & scissors', 'rock').toLowerCase();
+                computerselection = computerPlay();
+	            console.log(round(playerselection,computerselection));
+                playerselection = window.prompt('Input to play rock, paper & scissors', 'rock').toLowerCase();
+                computerselection = computerPlay();
+	            console.log(round(playerselection,computerselection));
+                playerselection = window.prompt('Input to play rock, paper & scissors', 'rock').toLowerCase();
+                computerselection = computerPlay();
+	            console.log(round(playerselection,computerselection));
+                playerselection = window.prompt('Input to play rock, paper & scissors', 'rock').toLowerCase();
+                computerselection = computerPlay();
+	            console.log(round(playerselection,computerselection));
+                playerselection = window.prompt('Input to play rock, paper & scissors', 'rock').toLowerCase();
+                computerselection = computerPlay();
+	            console.log(round(playerselection,computerselection));
+                console.log(caclScore());
+            }
+            function caclScore(){
+	            if (playerScore > computerScore) {
+		            return finalmessage("won",playerScore,computerScore);
+	            } else if (playerScore === computerScore) {
+		            return finalmessage("tied",playerScore,computerScore);
+	            } else {
+	            	return finalmessage("lost",playerScore,computerScore + " better luck next time!");
+	            }
+            }
+
+            function finalmessage(resultGame,playerScore,computerScore){
+	            return("You " + resultGame + " the game, you scored " + playerScore + " and the computer scored " + computerScore);
+            }
+
+            game();
+			
+        </script>
+    </body>
+</html>
