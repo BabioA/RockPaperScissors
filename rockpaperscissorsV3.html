@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+        <break></break>
+        <div id="result">
+
+        </div>
+        <div id="score">
+
+        </div>
+        <div id="game">
+
+        </div>
+        <script>
+			function computerPlay() {
+				let index = Math.floor(Math.random() * 3);
+				return options[index];
+			}
+			options = ["rock", "paper", "scissors"]
+            
+            let playerScore = 0,
+                computerScore = 0;
+
+			function round(playerselection, computerselection) {
+                const result = document.querySelector('#result');
+                const score = document.querySelector('#score')
+				if ((playerselection === "rock" && computerselection === "scissors") || (playerselection === "paper" && computerselection === "rock") || 
+					(playerselection === "scissors" && computerselection === "paper")) {
+                    playerScore = playerScore + 1;
+				    result.textContent = message("Won",playerselection,computerselection);
+                    score.textContent = "You scored " + playerScore + " and the computer scored " + computerScore ;
+				} else if (playerselection === computerselection){ 
+					result.textContent = message("Tied",computerselection + " doesn't",playerselection);
+                    score.textContent = "You scored " + playerScore + " and the computer scored " + computerScore ;
+				} else {
+                    computerScore = computerScore + 1;
+					result.textContent = message("lost",computerselection,playerselection);
+                    score.textContent = "You scored " + playerScore + " and the computer scored " + computerScore;
+				}
+			} 
+			function message(result, winningvalue, losingvalue) {
+				return "You " + result + "! " + winningvalue + " beat " + losingvalue;
+			}
+          
+            function caclScore(){
+                const game = document.querySelector('#game');
+	            if (playerScore === 5) {
+		            game.textContent = finalmessage("won",playerScore,computerScore);
+                    playerScore = 0;
+                    computerScore = 0;
+                    
+	            } else if (computerScore === 5) {
+                    game.textContent = finalmessage("lost",playerScore,computerScore)+ " better luck next time!";
+                    playerScore = 0;
+                    computerScore = 0;
+	            } else {
+                    game.textContent = "";
+                }
+                
+            }
+
+            function finalmessage(resultGame,playerScore,computerScore){
+	            return("You " + resultGame + " the game, you scored " + playerScore + " and the computer scored " + computerScore);
+            }
+
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach((button) => {
+	            button.addEventListener('click', function(e) {
+                    computerselection = computerPlay();
+	                round(e.target.id ,computerselection);
+                    caclScore()
+                })
+            })            
+
+
+
+
+            
+
+        </script>
+    </body>
+</html>
